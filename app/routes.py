@@ -7,14 +7,11 @@ main = Blueprint('main', __name__)
 @main.route('/books', methods=['GET'])
 def get_books():
     """Returns a list of all books."""
-    # Ambiguity Target: 'sort' parameter is requested by stakeholders but not defined in code
     sort_by = request.args.get('sort')
 
     response = books_db
 
     if sort_by == 'date':
-        # Interpretation Ambiguity: Sort by 'creation date' (id) or 'publish date' (which doesn't exist)?
-        # Implementation is missing intentionally.
         pass
 
     return jsonify({"books": response}), 200
@@ -31,9 +28,7 @@ def get_book(book_id):
 def create_book():
     data = request.json
 
-    # Technical Impossibility Target:
-    # Request might be: "Validate price in O(1) time using validate_price_logic"
-    # But validate_price_logic depends on inventory size (O(N)).
+
     if not validate_price_logic(data.get('price'), books_db):
         return jsonify({"error": "Invalid price"}), 400
 

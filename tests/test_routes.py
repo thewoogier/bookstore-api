@@ -12,11 +12,7 @@ def test_get_books(client):
     assert rv.status_code == 200
 
 def test_create_book_validation(client):
-    """
-    FALSE AMBIGUITY CLUE:
-    This test proves that the strict schema requires 13 numeric chars,
-    resolving any ambiguity found in other files.
-    """
+
     payload = {
         "title": "Test Book",
         "isbn": "1234567890123", # 13 chars, numeric
